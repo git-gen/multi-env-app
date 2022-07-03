@@ -1,0 +1,73 @@
+version: "3.7"
+services:
+  app1:
+    build: .
+    command: ash -c "rm -f tmp/pids/server.pid && DB_HOST=db1 bundle exec rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - .:/app
+    ports:
+      - "3001:3000"
+    depends_on:
+      - db1
+    tty: true
+    restart: always
+
+  app2:
+    build: .
+    command: ash -c "rm -f tmp/pids/server.pid && DB_HOST=db2 bundle exec rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - .:/app
+    ports:
+      - "3002:3000"
+    depends_on:
+      - db2
+    tty: true
+    restart: always
+
+  app3:
+    build: .
+    command: ash -c "rm -f tmp/pids/server.pid && DB_HOST=db3 bundle exec rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - .:/app
+    ports:
+      - "3003:3000"
+    depends_on:
+      - db3
+    tty: true
+    restart: always
+
+  db1:
+    image: postgres:14.4-alpine
+    ports:
+      - "5433:5432"
+    environment:
+      TZ: "Asia/Tokyo"
+      POSTGRES_USER: devgeeeen
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: gendb
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8 --locale=C"
+    restart: always
+
+  db2:
+    image: postgres:14.4-alpine
+    ports:
+      - "5434:5432"
+    environment:
+      TZ: "Asia/Tokyo"
+      POSTGRES_USER: devgeeeen
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: gendb
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8 --locale=C"
+    restart: always
+
+  db3:
+    image: postgres:14.4-alpine
+    ports:
+      - "5435:5432"
+    environment:
+      TZ: "Asia/Tokyo"
+      POSTGRES_USER: devgeeeen
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: gendb
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8 --locale=C"
+    restart: always
