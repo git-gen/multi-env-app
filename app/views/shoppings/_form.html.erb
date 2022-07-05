@@ -1,22 +1,24 @@
 <%= form_with url: shopping_path do |form|  %>
-  <% @items.each do |item| %>
-    <%= form.hidden_field 'items[][id]', value: item.id %>
-    <table border="1">
-      <thead>
-        <tr>
-          <th>商品名</th>
-          <th>金額</th>
-          <th>商品購入数</th>
-        <tr>
-      </thead>
-      <tbody>
+  <table border="1" class="item-table">
+    <thead>
+      <tr>
+        <th class="test">商品名</th>
+        <th>金額</th>
+        <th>商品購入数</th>
+      <tr>
+    </thead>
+    <tbody>
+      <% @items.each do |item| %>
+        <%= form.hidden_field "items[][id]", value: item.id %>
         <tr>
           <td><%= item.title %></td>
           <td><%= item.price %></td>
-          <td><%= form.number_field 'items[][count]' %></td>
+          <td><%= form.number_field "items[][count]" %></td>
         </tr>
-      </tbody>
-    </table>
-  <% end %>
-  <%= form.submit '商品を購入する' %>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="button">
+    <%= form.submit "商品を購入する", class: "submit-button" %>
+  </div>
 <% end %>

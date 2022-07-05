@@ -1,0 +1,17 @@
+.shopping-title {
+  text-align: center;
+}
+.item-table {
+  margin: auto;
+  margin-bottom: 12px;
+}
+.button {
+  display: flex;
+  justify-content: center;
+}
+.submit-button {
+  padding: 4px 16px;
+  background-color: #fff;
+  border-radius: 4px;
+  font-size: 18px;
+}
