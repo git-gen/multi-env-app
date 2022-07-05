@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
+  resource :shopping, onyl: %i(show create)
   resources :orders
   resources :items
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  namespace :api do
+    resource :item_stock, only: %i(show update)
+    resource :search_order, only: %i(show)
+  end
 end
