@@ -1,6 +1,6 @@
 class ShoppingsController < ApplicationController
   def show
-    @items = Item.where(enabled: true)
+    @items = Item.where(enabled: true).order(:id)
   end
 
   def create
