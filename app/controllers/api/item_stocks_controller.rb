@@ -1,5 +1,7 @@
 module Api
   class ItemStocksController < ApplicationController
+    skip_forgery_protection
+
     def show
       @item = Item.find_by(sku: params[:sku])
 
@@ -10,11 +12,13 @@ module Api
       end
     end
 
-    def update
-      item = Item.find_by(sku: update_params[:sku])
-      item.update!(stock: update_params[:stock])
+    def create
+      item = Item.find_by(sku: create_params[:sku])
+      item.update!(stock: create_params[:stock])
 
-      render status: :ok
+      respond_to do |format|
+        format.json { render json: { result: 'success' }, status: :ok }
+      end
     end
 
     private
@@ -23,7 +27,7 @@ module Api
       params.permit(:sku)
     end
 
-    def update_params
+    def create_params
       params.permit(:sku, :stock)
     end
   end
