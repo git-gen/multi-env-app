@@ -5,7 +5,7 @@ module Api
     def show
       now = Time.current
       @orders = Order
-        .where(created_at: now.ago(10.days)...now)
+        .where(created_at: now.ago(5.minutes)...now)
         .order(created_at: :desc)
 
       respond_to do |format|
